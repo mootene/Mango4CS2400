@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterface
+public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterface<T>
 {
     private T[] heap;
     private int lastIndex = 0;
@@ -155,11 +155,9 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
     }
     
     @Override
-    public int addEntry(Comparable newEntry)
+    public int addEntry(T newEntry)
     {
-        @SuppressWarnings("unchecked")
-        T e = (T) newEntry;
-        heap[++lastIndex] = e;
+        heap[++lastIndex] = newEntry;
         ensureCapacity();
         return upheap(lastIndex);
     }
