@@ -41,7 +41,10 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         if(index > MAX_CAPACITY)
             throw new IndexOutOfBoundsException("Requested capacity " + index + " exceeds MAX_CAPACITY of " + MAX_CAPACITY);
     }
-    
+    /**
+     * Ensures capacity for next addition by doubling heap capacity 
+     * if next last index is greater than capacity
+     */
     private void ensureCapacity()
     {
         // If the next index we use will be out of bounds for the array, expand:
@@ -52,6 +55,9 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         }
     }
 
+    /**
+     * returns the max node in the heap (element in heap(1))
+     */
     public T getMax()
     {
         checkInitialization();
@@ -61,6 +67,9 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         return root;
     }
 
+    /**
+     * detects if heap has no nodes
+     */
     public boolean isEmpty()
     {
         return lastIndex < 1;
@@ -121,6 +130,12 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         return numberOfSwaps;
     }
 
+    /**
+     * creates a new heap using "dumb" method of recursive add/reheap calls 
+     * from given array
+     * @param entries array to be initilaized into this heap
+     * @return number of swaps completed creating the heap
+     */
     public int dumbCreate(T[] entries)
     {
         checkCapacity(entries.length+1);
@@ -132,6 +147,12 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         return swaps;
     }
 
+    /**
+     * creates a new heap using "smart" method of reorganizing an unorganized 
+     * copy of a given array
+     * @param entries array to be initialized to this heap
+     * @return number of swaps completed in creating the heap
+     */
     public int smartCreate(T[] entries)
     {
         checkCapacity(entries.length + 1);
@@ -154,7 +175,14 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         return swaps; 
     }
     
+
     @Override
+    /**
+     * adds new entry to the end of the heap, ensures capacity for following add call
+     * then performs upheap to reorganize this heap on new addition
+     * @param newEntry entry to be added to the heap
+     * @return number of swaps performed in adding/upheaping
+     */
     public int addEntry(T newEntry)
     {
         heap[++lastIndex] = newEntry;
