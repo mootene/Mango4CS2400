@@ -18,13 +18,123 @@ public class MaxHeapTest
 
       assertEquals(0, heap1.getSize());
       assertEquals(heap1.getSize(), heap2.getSize());
+      assertEquals(25, heap1.getCapacity());
+      assertEquals(26, heap2.getCapacity());
    }
+
+   @Test
+   void testCheckInitialization()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      /* ASK ABA
+      assertTrue(heap1.checkInitialization()); */
+   }
+
+   @Test 
+   void testGetCapacity()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      MaxHeap<Integer> heap2 = new MaxHeap<>(32);
+      
+      assertEquals(32, heap2.getCapacity());
+      assertEquals(25, heap1.getCapacity());
+   }
+
+   @Test
+   void testGetMax()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.addEntry(17);
+      heap1.addEntry(28);
+      heap1.addEntry(3);
+
+      assertEquals(28, heap1.getMax());
+   }
+
+   @Test
+   void testIsEmpty()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+
+      assertTrue(heap1.isEmpty());
+
+      heap1.addEntry(17);
+
+      assertFalse(heap1.isEmpty());
+   }
+
+   @Test
+   void testGetSize()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.addEntry(17);
+      heap1.addEntry(28);
+      heap1.addEntry(3);
+      MaxHeap<Integer> heap2 = new MaxHeap<>();
+
+      assertEquals(3, heap1.getSize());
+      assertEquals(0, heap2.getSize());
+   }
+
+   @Test
+   void testClear()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.addEntry(17);
+      heap1.addEntry(28);
+      heap1.addEntry(3);
+      heap1.clear();
+
+      assertEquals(0, heap1.getSize());
+   }
+
+   @Test
+   void testRemoveMax()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      for (int i = 1; i < 26; i ++)
+      {
+         heap1.addEntry(i);
+      }
+
+      assertEquals(25, heap1.removeMax());
+      assertEquals(24, heap1.removeMax());
+
+      heap1.addEntry(49);
+
+      assertEquals(49, heap1.removeMax());
+   }
+
+   @Test
+   void testDumbCreate()
+   {
+      //ASK
+      Integer[] heapEntries = [1 5 37 200 515];
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.dumbCreate(heapEntries);
+
+      assertFalse(heap1.isEmpty());
+      assertEquals(515, heap1.removeMax());
+      assertEquals(5, heap1.getSize());
+      assertEquals(25, heap1.getCapacity());
+   }
+
+   @Test
+   void testSmartCreate()
+   {
+      //ASK
+      Integer[] heapEntries = [1 5 37 200 515];
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.smartCreate(heapEntries);
+
+      assertFalse(heap1.isEmpty());
+      assertEquals(515, heap1.removeMax());
+      assertEquals(5, heap1.getSize());
+      assertEquals(25, heap1.getCapacity());
+   }
+
    public static void main(String args[])
    {
-        Scanner inputScnr = new Scanner(System.in);
-        System.out.println("Enter file name:");
-        String fileName = inputScnr.nextLine();
-        File inputFile = new File(fileName);
-        Scanner fileScnr = new Scanner(inputFile);
+
    } 
 }
