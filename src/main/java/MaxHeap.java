@@ -56,6 +56,15 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
     }
 
     /**
+     * retrieves current heap capacity
+     * @return current heap capacity
+     */
+    public int getCapacity()
+    {
+        return (heap.length - 1);
+    }
+
+    /**
      * returns the max node in the heap (element in heap(1))
      */
     public T getMax()
@@ -75,11 +84,18 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         return lastIndex < 1;
     }
 
+    /**
+     * gets the size of filled heap array
+     * @return lastIndex of the heap
+     */
     public int getSize()
     {
         return lastIndex;
     }
 
+    /**
+     * empties the heap
+     */
     public void clear()
     {
         checkInitialization();
