@@ -174,7 +174,7 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         checkCapacity(entries.length + 1);
         @SuppressWarnings("unchecked")
         T[] tempHeap = (T[]) new Comparable[
-            Math.max(DEFAULT_CAPACITY, entries.length + 1)
+            Math.max(DEFAULT_CAPACITY + 1, entries.length + 1)
             ];
         int swaps = 0;
         for (int i = 0; i < entries.length; i++)
@@ -182,6 +182,7 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
             tempHeap[i+1] = entries[i];
         }
         heap = tempHeap;
+        lastIndex = entries.length;
         int leaves = (lastIndex + 1) / 2;
         int lastNonleafIndex = lastIndex - leaves;
         for (int i = lastNonleafIndex; i > 0; i--)
