@@ -86,6 +86,7 @@ public class MaxHeapTest
       heap1.clear();
 
       assertEquals(0, heap1.getSize());
+
    }
 
    @Test
@@ -108,31 +109,56 @@ public class MaxHeapTest
    @Test
    void testDumbCreate()
    {
-      //ASK
-      Integer[] heapEntries = [1 5 37 200 515];
+      Integer heapEntries[] = {1, 37, 5, 200, 515};
       MaxHeap<Integer> heap1 = new MaxHeap<>();
       heap1.dumbCreate(heapEntries);
 
       assertFalse(heap1.isEmpty());
-      assertEquals(515, heap1.removeMax());
+      assertEquals(515, heap1.getMax());
       assertEquals(5, heap1.getSize());
       assertEquals(25, heap1.getCapacity());
+      assertEquals(515, heap1.removeMax());
+      assertEquals(200, heap1.removeMax());
+      assertEquals(37, heap1.removeMax());
+      assertEquals(5, heap1.removeMax());
+      assertEquals(1, heap1.removeMax());
    }
 
    @Test
    void testSmartCreate()
    {
-      //ASK
-      Integer[] heapEntries = [1 5 37 200 515];
+      Integer heapEntries[] = {1, 37, 5, 200, 515};
       MaxHeap<Integer> heap1 = new MaxHeap<>();
       heap1.smartCreate(heapEntries);
 
       assertFalse(heap1.isEmpty());
-      assertEquals(515, heap1.removeMax());
+      assertEquals(515, heap1.getMax());
       assertEquals(5, heap1.getSize());
       assertEquals(25, heap1.getCapacity());
+      assertEquals(515, heap1.removeMax());
+      assertEquals(200, heap1.removeMax());
+      assertEquals(37, heap1.removeMax());
+      assertEquals(5, heap1.removeMax());
+      assertEquals(1, heap1.removeMax());
    }
 
+   @Test
+   void testAddEntry()
+   {
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      heap1.addEntry(3);
+
+      assertFalse(heap1.isEmpty());
+
+      heap1.addEntry(15);
+
+      assertEquals(15, heap1.getMax());
+
+      heap1.addEntry(1);
+
+      assertEquals(25, heap1.getCapacity());
+      assertEquals(3, heap1.getSize());
+   }
    public static void main(String args[])
    {
 
