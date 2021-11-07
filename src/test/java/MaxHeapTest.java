@@ -5,6 +5,8 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.function.Executable;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +28,32 @@ public class MaxHeapTest
    void testCheckInitialization()
    {
       MaxHeap<Integer> heap1 = new MaxHeap<>();
-      /* ASK ABA
-      assertTrue(heap1.checkInitialization()); */
+      heap1.checkInitialization();
+   }
+
+   @Test
+   void testCapacityLimit()
+   {
+      // Should not throw an exception, because 2000 is within the allowed limit
+      MaxHeap<Integer> heap1 = new MaxHeap<>();
+      for (int i = 0; i < 2000; i++)
+      {
+            heap1.addEntry(i);
+      }
+
+      // Should throw an exception, because 20000 is outside the allowed limit
+      assertThrows(IndexOutOfBoundsException.class,
+                new Executable() {
+                    @Override
+                    public void execute() throws Throwable 
+                    {
+                        MaxHeap<Integer> heap1 = new MaxHeap<>();
+                        for (int i = 0; i < 20000; i++)
+                        {
+                              heap1.addEntry(i);
+                        }
+                    }
+                });
    }
 
    @Test 
