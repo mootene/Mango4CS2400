@@ -137,7 +137,7 @@ public class MaxHeapTest
    {
       Integer heapEntries[] = {1, 37, 5, 200, 515};
       MaxHeap<Integer> heap1 = new MaxHeap<>();
-      heap1.dumbCreate(heapEntries);
+      assertEquals(5, heap1.dumbCreate(heapEntries));
 
       assertFalse(heap1.isEmpty());
       assertEquals(515, heap1.getMax());
@@ -155,7 +155,7 @@ public class MaxHeapTest
    {
       Integer heapEntries[] = {1, 37, 5, 200, 515};
       MaxHeap<Integer> heap1 = new MaxHeap<>();
-      heap1.smartCreate(heapEntries);
+      assertEquals(4, heap1.smartCreate(heapEntries));
 
       assertFalse(heap1.isEmpty());
       assertEquals(515, heap1.getMax());

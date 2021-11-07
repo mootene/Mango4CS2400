@@ -30,6 +30,9 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         initialized = true;
     }
 
+    /**
+     * checks boolean private field, throws IllegalStateException if false
+     */
     public void checkInitialization()
     {
         if (!initialized)
@@ -41,6 +44,7 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         if(index > MAX_CAPACITY)
             throw new IndexOutOfBoundsException("Requested capacity " + index + " exceeds MAX_CAPACITY of " + MAX_CAPACITY);
     }
+
     /**
      * Ensures capacity for next addition by doubling heap capacity 
      * if next last index is greater than capacity
@@ -106,6 +110,7 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         }
         lastIndex = 0;
     }
+
     /**
      * removes entry at heap[1] (root index) and replaces it with last element (heap [lastIndex])
      * @return entry removed
@@ -206,6 +211,7 @@ public class MaxHeap<T extends Comparable<? super T>> implements MaxHeapInterfac
         ensureCapacity();
         return upheap(lastIndex);
     }
+
     /**
      * performs upheap of heap from given child index
      * @param index index of child element of interest
