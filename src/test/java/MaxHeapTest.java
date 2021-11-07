@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.Writer;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -185,8 +189,68 @@ public class MaxHeapTest
       assertEquals(25, heap1.getCapacity());
       assertEquals(3, heap1.getSize());
    }
-   public static void main(String args[])
+   public static void main(String args[]) throws IOException
    {
+      Integer [] nums = new Integer[100];
+      int count = 0; 
+      try{
+         File text = new File("data_sorted.txt");
+         Scanner scan = new Scanner(text);
+         while(scan.hasNextLine())
+         {
+            nums[count++] = scan.nextInt();
+         }
+      } catch(FileNotFoundException e)
+      {
+         System.out.println("There was an error with the file.");
+         e.printStackTrace();
+      }
 
+      MaxHeap<Integer> n = new MaxHeap<>();
+      MaxHeap<Integer> n2 = new MaxHeap<>();
+      n.dumbCreate(nums);
+      n2.smartCreate(nums);
+
+      try{
+         BufferedWriter w = new BufferedWriter(new FileWriter("outputfile.txt"));
+         w.write("Heap built using sequential insertions: ");
+         for(int i=0; i<10; i++)
+         {
+            w.write(n.addEntry(i) + ",");
+         }
+         w.write("...\n");
+
+         w.write("Number of swaps in the heap creation: " + n.dumbCreate(nums) + "\n");
+         
+         w.write("Heap after 10 removals: ");
+         for(int i=0; i<10; i++)
+         {
+            n.removeMax();
+            w.write(n.addEntry(i) + ",");
+         }
+         w.write("...\n");
+
+         w.write("Heap built using optimal method: ");
+         for(int i=0; i<10; i++)
+         {
+            w.write(n2.addEntry(i) + ",");
+         }
+         w.write("...\n");
+
+         w.write("Number of swaps in the heap creation: " + n2.smartCreate(nums) + "\n");
+
+         w.write("Heap after 10 removals: ");
+         for(int i=0; i<10; i++)
+         {
+            n2.removeMax();
+            w.write(n2.addEntry(i) + ",");
+         }
+         w.write("...\n");
+         w.close();
+      }catch(FileNotFoundException e)
+      {
+         System.out.println("There was an error with the file.");
+         e.printStackTrace();
+      }
    } 
 }
