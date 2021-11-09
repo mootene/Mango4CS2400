@@ -194,7 +194,7 @@ public class MaxHeapTest
       Integer [] nums = new Integer[100];
       int count = 0; 
       try{
-         File text = new File("data_sorted.txt");
+         File text = new File("/Users/Jibbers/Project4/src/test/java/data_random.txt");
          Scanner scan = new Scanner(text);
          while(scan.hasNextInt())
          {
@@ -212,11 +212,12 @@ public class MaxHeapTest
       n2.smartCreate(nums);
 
       try{
-         BufferedWriter w = new BufferedWriter(new FileWriter("outputfile.txt"));
+         BufferedWriter w = new BufferedWriter(new FileWriter("/Users/Jibbers/Project4/src/test/java/outputfile.txt"));
          w.write("Heap built using sequential insertions: ");
          for(int i=0; i<10; i++)
          {
-            w.write(n.addEntry(i) + ",");
+            w.write(n.getMax() + ",");
+            n.removeMax();
          }
          w.write("...\n");
 
@@ -226,15 +227,19 @@ public class MaxHeapTest
          for(int i=0; i<10; i++)
          {
             n.removeMax();
-            w.write(n.addEntry(i) + ",");
+            for(int j=0; j<1; j++)
+            {
+               w.write(n.getMax() + ",");
+            }
          }
          w.write("...\n");
 
-         n2.clear();
+
          w.write("Heap built using optimal method: ");
          for(int i=0; i<10; i++)
          {
-            w.write(n2.addEntry(i) + ",");
+            w.write(n2.getMax() + ",");
+            n2.removeMax();
          }
          w.write("...\n");
 
@@ -244,9 +249,13 @@ public class MaxHeapTest
          for(int i=0; i<10; i++)
          {
             n2.removeMax();
-            w.write(n2.addEntry(i) + ",");
+            for(int j=0; j<1; j++)
+            {
+               w.write(n2.getMax() + ",");
+            }
          }
          w.write("...\n");
+
          w.close();
       }catch(FileNotFoundException e)
       {
