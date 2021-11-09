@@ -194,7 +194,7 @@ public class MaxHeapTest
       Integer [] nums = new Integer[100];
       int count = 0; 
       try{
-         File text = new File("/Users/Jibbers/Project4/src/test/java/data_random.txt");
+         File text = new File("/Users/Jibbers/Project4/src/test/java/data_sorted.txt");
          Scanner scan = new Scanner(text);
          while(scan.hasNextInt())
          {
@@ -227,10 +227,11 @@ public class MaxHeapTest
          for(int i=0; i<10; i++)
          {
             n.removeMax();
-            for(int j=0; j<1; j++)
-            {
-               w.write(n.getMax() + ",");
-            }
+         }
+         for(int j=0; j<10; j++)
+         {
+            w.write(n.getMax() + ",");
+            n.removeMax();
          }
          w.write("...\n");
 
@@ -249,10 +250,11 @@ public class MaxHeapTest
          for(int i=0; i<10; i++)
          {
             n2.removeMax();
-            for(int j=0; j<1; j++)
-            {
-               w.write(n2.getMax() + ",");
-            }
+         }
+         for(int j=0; j<10; j++)
+         {
+            w.write(n2.getMax() + ",");
+            n2.removeMax();
          }
          w.write("...\n");
 
@@ -262,5 +264,5 @@ public class MaxHeapTest
          System.out.println("There was an error with the file.");
          e.printStackTrace();
       }
-   } 
+   }  
 }
