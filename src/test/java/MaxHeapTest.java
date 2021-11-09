@@ -196,7 +196,7 @@ public class MaxHeapTest
       try{
          File text = new File("data_sorted.txt");
          Scanner scan = new Scanner(text);
-         while(scan.hasNextLine())
+         while(scan.hasNextInt())
          {
             nums[count++] = scan.nextInt();
          }
